@@ -37,8 +37,8 @@ export namespace AccAddress {
   export function validate(data: string): boolean {
     // 44 for normal account and 64 for contract account
     return (
-      checkPrefixAndLength('terra', data, 44) ||
-      checkPrefixAndLength('terra', data, 64)
+      checkPrefixAndLength('ugo', data, 42) ||
+      checkPrefixAndLength('ugo', data, 62)
     );
   }
 
@@ -49,7 +49,7 @@ export namespace AccAddress {
    */
   export function fromValAddress(address: ValAddress): AccAddress {
     const vals = bech32.decode(address);
-    return bech32.encode('terra', vals.words);
+    return bech32.encode('ugo', vals.words);
   }
 }
 
@@ -60,7 +60,7 @@ export namespace AccPubKey {
    */
 
   export function validate(data: string): boolean {
-    return checkPrefixAndLength('terrapub', data, 47);
+    return checkPrefixAndLength('ugopub', data, 45);
   }
 
   /**
@@ -69,7 +69,7 @@ export namespace AccPubKey {
    */
   export function fromAccAddress(address: AccAddress): AccPubKey {
     const vals = bech32.decode(address);
-    return bech32.encode('terrapub', vals.words);
+    return bech32.encode('ugopub', vals.words);
   }
 }
 
@@ -80,7 +80,7 @@ export namespace ValAddress {
    * @param data string to check
    */
   export function validate(data: string): boolean {
-    return checkPrefixAndLength('terravaloper', data, 51);
+    return checkPrefixAndLength('ugovaloper', data, 49);
   }
 
   /**
@@ -89,7 +89,7 @@ export namespace ValAddress {
    */
   export function fromAccAddress(address: AccAddress): ValAddress {
     const vals = bech32.decode(address);
-    return bech32.encode('terravaloper', vals.words);
+    return bech32.encode('ugovaloper', vals.words);
   }
 }
 
@@ -99,7 +99,7 @@ export namespace ValPubKey {
    * @param data string to check
    */
   export function validate(data: string): boolean {
-    return checkPrefixAndLength('terravaloperpub', data, 54);
+    return checkPrefixAndLength('ugovaloperpub', data, 52);
   }
 
   /**
@@ -108,7 +108,7 @@ export namespace ValPubKey {
    */
   export function fromValAddress(valAddress: ValAddress): ValPubKey {
     const vals = bech32.decode(valAddress);
-    return bech32.encode('terravaloperpub', vals.words);
+    return bech32.encode('ugovaloperpub', vals.words);
   }
 }
 
@@ -119,6 +119,6 @@ export namespace ValConsAddress {
    */
 
   export function validate(data: string): boolean {
-    return checkPrefixAndLength('terravalcons', data, 51);
+    return checkPrefixAndLength('ugovalcons', data, 49);
   }
 }

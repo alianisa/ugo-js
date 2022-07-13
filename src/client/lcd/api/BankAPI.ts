@@ -38,22 +38,4 @@ export class BankAPI extends BaseAPI {
       .then(d => [Coins.fromData(d.supply), d.pagination]);
   }
 
-  /**
-   * Lqueries the spenable balance of all coins for a single account.
-   * @param address address of account to look up.
-   */
-  public async spendableBalances(
-    address: AccAddress,
-    params: Partial<PaginationOptions & APIParams> = {}
-  ): Promise<[Coins, Pagination]> {
-    if (this.lcd.config.isClassic) {
-      throw new Error('Not supported for the network');
-    }
-    return this.c
-      .get<{
-        balances: Coins.Data;
-        pagination: Pagination;
-      }>(`/cosmos/bank/v1beta1/spendable_balances/${address}`, params)
-      .then(d => [Coins.fromData(d.balances), d.pagination]);
-  }
 }
